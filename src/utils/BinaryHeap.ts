@@ -29,14 +29,13 @@ class BinaryHeap {
 
     peroclateUp(): void {
         let i = this.size;
-        let parentIndex = Math.floor(i / 2);
-        while (parentIndex > 0) {
-            if (this.pairs[i] < this.pairs[parentIndex]) {
-                let tmp = this.pairs[parentIndex];
-                this.pairs[parentIndex] = this.pairs[i];
+        while (Math.floor(i / 2) > 0) {
+            if (this.pairs[i] < this.pairs[Math.floor(i / 2)]) {
+                let tmp = this.pairs[Math.floor(i / 2)];
+                this.pairs[Math.floor(i / 2)] = this.pairs[i];
                 this.pairs[i] = tmp;
             }
-            i = parentIndex;
+            i = Math.floor(i / 2);
         }
     }
 
@@ -48,9 +47,6 @@ class BinaryHeap {
     percolateDown(i: number): void {
         while ((i * 2) <= this.size) {
             let mc = this.minChild(i);
-            console.log(mc);
-            console.log(i);
-            console.log(this.size);
             if (this.pairs[i].getWeight > this.pairs[mc].getWeight) {
                 let tmp = this.pairs[i];
                 this.pairs[i] = this.pairs[mc];
@@ -93,7 +89,7 @@ class BinaryHeap {
         }
     }
 
-    
+
 }
 
 export { BinaryHeap };
