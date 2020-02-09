@@ -83,6 +83,17 @@ class BinaryHeap {
             throw new Error("NoSuchElementException");
         }
     }
+
+    getMin(): Pair {
+        if (this.size >0) {
+            let res = Object.assign({}, this.pairs[0]);
+            return res;
+        } else {
+            throw new Error("NoSuchElementException");
+        }
+    }
+
+    
 }
 
 export { BinaryHeap };
