@@ -28,11 +28,15 @@ class BinaryHeap {
             this.percolateDown(i);
             i = i - 1;
         }
+
+        for (i = 1; i < this.size; i++) {
+            this.pairIndex.set(this.pairs[i].getNode, i);
+        }
     }
 
     peroclateUp(i: number): void {
         while (Math.floor(i / 2) > 0) {
-            if (this.pairs[i] < this.pairs[Math.floor(i / 2)]) {
+            if (this.pairs[i].getWeight < this.pairs[Math.floor(i / 2)].getWeight) {
                 let tmp = this.pairs[Math.floor(i / 2)];
                 this.pairs[Math.floor(i / 2)] = this.pairs[i];
                 this.pairs[i] = tmp;
