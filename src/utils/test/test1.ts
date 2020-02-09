@@ -23,8 +23,11 @@ let bh = new BinaryHeap();
 bh.buildHeap(pairs);
 
 console.log(bh.getPairs);
+bh.decreaseKey(d, 0);
+console.log(bh.getPairs);
 console.log(bh.deleteMin());
 console.log(bh.deleteMin());
 console.log(bh.deleteMin());
 console.log(bh.deleteMin());
 console.log(bh.deleteMin());
+// console.log(bh.deleteMin());
