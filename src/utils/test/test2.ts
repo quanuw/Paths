@@ -1,6 +1,4 @@
 import { Node } from "./../Node";
-import { Pair } from "../Pair";
-import { BinaryHeap } from "../BinaryHeap";
 import { Graph } from "../Graph";
 import { Edge } from "../Edge";
 import { Search } from "../Search";

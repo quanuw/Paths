@@ -16,6 +16,10 @@ class Pair {
     get getNode(): Node {
         return this.node;
     }
+
+    setWeight(weight: number) {
+        this.weight = weight;
+    }
 }
 
 export { Pair };

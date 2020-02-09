@@ -3,11 +3,14 @@ import { Pair } from "./Pair";
 
 class BinaryHeap {
     private pairs: Array<Pair>;
+    private pairIndex: Map<Node, number>;
 
     constructor() {
         const dummyNode = new Node("dummyNode", []);
         const dummyPair = new Pair(0, dummyNode);
         this.pairs = [dummyPair];
+        this.pairIndex = new Map();
+        this.pairIndex.set(dummyNode, 0);
     }
 
     get size(): number {
@@ -27,13 +30,14 @@ class BinaryHeap {
         }
     }
 
-    peroclateUp(): void {
-        let i = this.size;
+    peroclateUp(i: number): void {
         while (Math.floor(i / 2) > 0) {
             if (this.pairs[i] < this.pairs[Math.floor(i / 2)]) {
                 let tmp = this.pairs[Math.floor(i / 2)];
                 this.pairs[Math.floor(i / 2)] = this.pairs[i];
                 this.pairs[i] = tmp;
+                this.pairIndex.set(this.pairs[i].getNode, Math.floor(i / 2));
+                this.pairIndex.set(tmp.getNode, i);
             }
             i = Math.floor(i / 2);
         }
@@ -41,7 +45,7 @@ class BinaryHeap {
 
     insert(pair: Pair): void {
         this.pairs.push(pair);
-        this.peroclateUp();
+        this.peroclateUp(this.size);
     }
 
     percolateDown(i: number): void {
@@ -51,6 +55,8 @@ class BinaryHeap {
                 let tmp = this.pairs[i];
                 this.pairs[i] = this.pairs[mc];
                 this.pairs[mc] = tmp;
+                this.pairIndex.set(this.pairs[mc].getNode, i);
+                this.pairIndex.set(tmp.getNode, mc);
             }
             i = mc;
         }
@@ -86,6 +92,16 @@ class BinaryHeap {
             return res;
         } else {
             throw new Error("NoSuchElementException");
+        }
+    }
+
+    decreaseKey(item: Node, value: number): void {
+        if (this.pairIndex.has(item)) {
+            let index = this.pairIndex.get(item)!;
+            if (value < this.pairs[index].getWeight) { // Can only decrease weight
+                this.pairs[index].setWeight(value);
+                this.peroclateUp(index);
+            }
         }
     }
 

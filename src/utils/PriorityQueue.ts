@@ -1,4 +1,5 @@
 import { BinaryHeap } from "./BinaryHeap";
+import { Node } from "./Node";
 import { Pair } from "./Pair";
 
 class PriorityQueue {
@@ -45,6 +46,9 @@ class PriorityQueue {
         return this.binaryHeap.size < 1;
     }
 
+    decreaseKey(item: Node, value: number) {
+        this.binaryHeap.decreaseKey(item, value);
+    }
 
 }
 

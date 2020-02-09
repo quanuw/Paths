@@ -35,6 +35,7 @@ class Search {
                         // TODO: decrease key in pq?
                         dist.set(edge.getEnd, alt);
                         prev.set(edge.getEnd, edge.getStart);
+                        pq.decreaseKey(edge.getEnd, alt);
                     }
                 }
             )
