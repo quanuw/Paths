@@ -43,3 +43,5 @@ class PriorityQueue {
 
 
 }
+
+export { PriorityQueue };
