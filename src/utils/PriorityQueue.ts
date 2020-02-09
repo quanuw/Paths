@@ -41,6 +41,10 @@ class PriorityQueue {
         this.binaryHeap.insert(item);
     }
 
+    isEmpty(): boolean {
+        return this.binaryHeap.size < 1;
+    }
+
 
 }
 
