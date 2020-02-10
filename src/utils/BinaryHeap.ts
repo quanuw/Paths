@@ -46,12 +46,7 @@ class BinaryHeap {
                 this.pairIndex.set(this.pairs[i].getNode, Math.floor(i / 2));
                 this.pairs[Math.floor(i / 2)] = this.pairs[i];
                 this.pairIndex.set(tmp.getNode, i);
-                this.pairs[i] = tmp;
-                
-                
-                
-                
-                
+                this.pairs[i] = tmp;   
             }
             i = Math.floor(i / 2);
         }
