@@ -21,6 +21,10 @@ class BinaryHeap {
         return this.pairs;
     }
 
+    get getPairIndex(): Map<Node, number> {
+        return this.pairIndex;
+    }
+
     buildHeap(a: Array<Pair>): void {
         let i = Math.floor(a.length / 2);
         this.pairs = [...this.pairs, ...a];
@@ -37,11 +41,17 @@ class BinaryHeap {
     peroclateUp(i: number): void {
         while (Math.floor(i / 2) > 0) {
             if (this.pairs[i].getWeight < this.pairs[Math.floor(i / 2)].getWeight) {
+                
                 let tmp = this.pairs[Math.floor(i / 2)];
-                this.pairs[Math.floor(i / 2)] = this.pairs[i];
-                this.pairs[i] = tmp;
                 this.pairIndex.set(this.pairs[i].getNode, Math.floor(i / 2));
+                this.pairs[Math.floor(i / 2)] = this.pairs[i];
                 this.pairIndex.set(tmp.getNode, i);
+                this.pairs[i] = tmp;
+                
+                
+                
+                
+                
             }
             i = Math.floor(i / 2);
         }
@@ -82,18 +92,28 @@ class BinaryHeap {
         if (this.size > 0) {
             let res = this.pairs[1];
             this.pairs[1] = this.pairs[this.size];
-            this.pairs.pop();
+            this.pairs.splice(1, 1);
+            this.pairIndex.delete(res.getNode);
             this.percolateDown(1);
+            this.updatePairIndex(-1);
             return res;
         } else {
             throw new Error("NoSuchElementException");
         }
     }
 
+    updatePairIndex(shift: number): void {
+        this.pairIndex.forEach(function(value, key, map) {
+            if (value > 0) {
+                map.set(key, value + shift);
+            }
+        })
+    }
+
     getMin(): Pair {
-        if (this.size >0) {
-            let res = Object.assign({}, this.pairs[0]);
-            return res;
+        if (this.size > 0) {
+            // let res = Object.assign({}, this.pairs[1]);
+            return this.pairs[1];
         } else {
             throw new Error("NoSuchElementException");
         }
@@ -102,6 +122,7 @@ class BinaryHeap {
     decreaseKey(item: Node, value: number): void {
         if (this.pairIndex.has(item)) {
             let index = this.pairIndex.get(item)!;
+            // decreasing key after deletion is leading to index issues in test2
             if (value < this.pairs[index].getWeight) { // Can only decrease weight
                 this.pairs[index].setWeight(value);
                 this.peroclateUp(index);
