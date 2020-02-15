@@ -39,16 +39,29 @@ class BinaryHeap {
     }
 
     peroclateUp(i: number): void {
-        while (Math.floor(i / 2) > 0) {
+        if (i == 1) {
             if (this.pairs[i].getWeight < this.pairs[Math.floor(i / 2)].getWeight) {
-                
                 let tmp = this.pairs[Math.floor(i / 2)];
                 this.pairIndex.set(this.pairs[i].getNode, Math.floor(i / 2));
                 this.pairs[Math.floor(i / 2)] = this.pairs[i];
                 this.pairIndex.set(tmp.getNode, i);
                 this.pairs[i] = tmp;   
+            } else {
+                this.pairIndex.set(this.pairs[i].getNode, i);
             }
-            i = Math.floor(i / 2);
+        } else {
+            while (Math.floor(i / 2) > 0) {
+                if (this.pairs[i].getWeight < this.pairs[Math.floor(i / 2)].getWeight) {
+                    let tmp = this.pairs[Math.floor(i / 2)];
+                    this.pairIndex.set(this.pairs[i].getNode, Math.floor(i / 2));
+                    this.pairs[Math.floor(i / 2)] = this.pairs[i];
+                    this.pairIndex.set(tmp.getNode, i);
+                    this.pairs[i] = tmp;   
+                } else {
+                    this.pairIndex.set(this.pairs[i].getNode, i);
+                }
+                i = Math.floor(i / 2);
+            }
         }
     }
 
