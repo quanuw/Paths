@@ -20,6 +20,10 @@ class Pair {
     setWeight(weight: number) {
         this.weight = weight;
     }
+
+    toString(): string {
+        return "node: " + this.node.name +  ", " + "weight: " + this.weight;
+    }
 }
 
 export { Pair };
