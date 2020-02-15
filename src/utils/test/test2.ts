@@ -11,7 +11,7 @@ let node5 = new Node("b", null);
 let node6 = new Node("d", null);
 let node7 = new Node("e", null);
 
-let edgeSA = new Edge(node1, node2, 3);
+let edgeSA = new Edge(node1, node2, 5);
 let edgeSC = new Edge(node1, node3, 2);
 let edgeSF = new Edge(node1, node4, 6);
 let edgeAB = new Edge(node2, node5, 6);
@@ -44,8 +44,10 @@ let search = new Search();
 
 let res1 = search.djikstra(graph, node1);
 let res2 = search.djikstra(graph, node2);
-let res3 = search.djikstra(graph, node3);
+let res3 = search.djikstra(graph, node3); // distance to 'b' showing 11 but should be 10
 console.log(res1);
+
+let res4 = search.astar(graph, node1, node4, function(x: Node) { return 0});
 // console.log(res2);
 // console.log(res3);
 
