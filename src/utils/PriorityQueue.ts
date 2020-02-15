@@ -50,6 +50,23 @@ class PriorityQueue {
         this.binaryHeap.decreaseKey(item, value);
     }
 
+    contains(item: Node): boolean {
+        this.binaryHeap.getPairs.forEach(function(pair) {
+            if (pair.getNode === item) {
+                return true;
+            }
+        })
+        return false;
+    }
+
+    toString(): string {
+        let res = "";
+        this.binaryHeap.getPairs.forEach((pair) => {
+            res += "[" + pair.getNode.name + ", " + pair.getWeight + "], ";
+        })
+        return res;
+    }
+
 }
 
 export { PriorityQueue };
